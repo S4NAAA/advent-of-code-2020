@@ -42,29 +42,36 @@ public:
   }
 
   const std::size_t &get_ID(void) const { return ID; }
+  bool operator< (const BoardingPass &rhs) const { return ID < rhs.get_ID(); }
+  bool operator== (const BoardingPass &rhs) const { return ID == rhs.get_ID(); }
 
+  friend std::ostream& operator<< ( std::ostream& os, const BoardingPass& rhs );
 private:
   std::size_t ID;
 };
 
-
+std::ostream& operator<< (std::ostream& os, const BoardingPass& rhs) {
+  os << rhs.get_ID();
+  return os;
+}
 
 int main(void) {
  
   std::vector<std::string> data = load_data("input5.txt");
 
-  std::set<std::size_t> boarding_passes;
+  std::set<BoardingPass> boarding_passes;
 
   for (const auto &line : data)
-    boarding_passes.insert(BoardingPass(line).get_ID());
+    boarding_passes.insert(BoardingPass(line));
 
   std::cout << *boarding_passes.rbegin() << '\n';
  
-  const auto exists = [&](const std::size_t i) {
-    return boarding_passes.find(i) != boarding_passes.end(); 
+  const auto exists = [&](std::size_t i) {
+    return boarding_passes.find(*reinterpret_cast<BoardingPass*>(&i)) 
+            != boarding_passes.end(); 
   };
   
-  for (std::size_t i = 32; i < *boarding_passes.rbegin(); ++i) {
+  for (std::size_t i = 32; i < boarding_passes.rbegin()->get_ID(); ++i) {
     if (!exists(i))
       std::cout << i << '\n';
   }
