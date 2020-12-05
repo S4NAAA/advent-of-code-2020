@@ -43,7 +43,6 @@ public:
 
   const std::size_t &get_ID(void) const { return ID; }
   bool operator< (const BoardingPass &rhs) const { return ID < rhs.get_ID(); }
-  bool operator== (const BoardingPass &rhs) const { return ID == rhs.get_ID(); }
 
   friend std::ostream& operator<< ( std::ostream& os, const BoardingPass& rhs );
 private:
