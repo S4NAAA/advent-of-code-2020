@@ -45,6 +45,7 @@ public:
   bool operator< (const BoardingPass &rhs) const { return ID < rhs.get_ID(); }
 
   friend std::ostream& operator<< ( std::ostream& os, const BoardingPass& rhs );
+
 private:
   std::size_t ID;
 };
