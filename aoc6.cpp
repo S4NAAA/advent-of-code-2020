@@ -2,6 +2,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+// super inefficient solution for 6th day
+
 class Group {
 public:
   Group(const std::vector<std::string> &data) {
@@ -11,8 +13,10 @@ public:
       questions.insert(question);
 
     for (std::size_t i = 1; i < data.size(); ++i) {
-
-      std::unordered_set<char> answered; // can't delete whilist looping
+      
+      //shouldn't need this many structures, pretty sure there is a better way
+  
+      std::unordered_set<char> answered;
       std::vector<char> to_erase;
 
       for (const auto &question : data[i])
