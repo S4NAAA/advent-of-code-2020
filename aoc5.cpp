@@ -8,7 +8,6 @@ public:
   BoardingPass(const std::string &data) {
     std::size_t lower = 127, upper = 0;
 
-
     const auto update_row_boundaries = [&](const char &letter) -> void {
       if (letter == 'F' ) {
         lower = upper + (lower - upper) / 2;
