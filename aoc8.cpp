@@ -63,9 +63,10 @@ public:
     return instruction_info[i];
   }
 
-  std::vector<InstructionData> instruction_info;
 
 private:
+  std::vector<InstructionData> instruction_info;
+
   std::unordered_map<std::string, std::function<void(const ll)>> instructions = {
     {"acc", [&](const ll num) {
       val += num;
@@ -89,9 +90,8 @@ private:
 int main(void) {
 
   auto a = Interpreter("input8.txt");
-  const std::size_t s = a.get_size(); // just to be careful, im going to manage
 
-  for (std::size_t i = 0; i < s; ++i) {
+  for (std::size_t i = 0; i < a.get_size(); ++i) {
     auto &instruction = a.get_instruction(i);
 
     if (instruction.command == "nop") {
